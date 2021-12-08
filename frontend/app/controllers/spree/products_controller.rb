@@ -11,7 +11,7 @@ module Spree
 
     def index
       @searcher = build_searcher(params.merge(include_images: true, current_store: current_store))
-      @products = @searcher.retrieve_products
+      @products = @searcher.retrieve_products.order("created_at DESC")
 
       if http_cache_enabled?
         fresh_when etag: etag_index, last_modified: last_modified_index, public: true
